@@ -36,10 +36,14 @@ func Test_Integration(t *testing.T) {
 }
 
 func Test_Game(t *testing.T) {
+	// These tests do kind of a lot in hindsight, but it also feels right,
+	// because parsing and outputting the canonical string format is important.
+
 	t.Run("empty World", func(t *testing.T) {
 		game, err := life.Game("0 0")
 		require.NoError(t, err)
 
+		require.Equal(t, life.World{}, game)
 		require.Equal(t, "", game.String())
 	})
 
@@ -47,6 +51,7 @@ func Test_Game(t *testing.T) {
 		game, err := life.Game("1 1\n.")
 		require.NoError(t, err)
 
+		require.Equal(t, life.World{{0}}, game)
 		require.Equal(t, "1 1\n.\n", game.String())
 	})
 
@@ -54,6 +59,14 @@ func Test_Game(t *testing.T) {
 		game, err := life.Game("2 2\n.*\n**\n")
 		require.NoError(t, err)
 
+		require.Equal(
+			t,
+			life.World{
+				{0, 1},
+				{1, 1},
+			},
+			game,
+		)
 		require.Equal(t, "2 2\n.*\n**\n", game.String())
 	})
 }
