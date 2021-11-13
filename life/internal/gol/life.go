@@ -39,9 +39,11 @@ func Neighbours(grid [][]int, row, col int) int {
 	return total
 }
 
-func IsAlive(neighbours int) int {
-	switch neighbours {
-	case 2, 3:
+func IsAlive(alive, neighbours int) int {
+	switch {
+	case neighbours == 2 && alive == 1:
+		return 1
+	case neighbours == 3:
 		return 1
 	default:
 		return 0

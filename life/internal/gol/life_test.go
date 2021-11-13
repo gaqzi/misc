@@ -97,6 +97,17 @@ func TestNeighbours(t *testing.T) {
 			col:      0,
 			expected: 1,
 		},
+		{
+			name: "3x3 full grid",
+			input: [][]int{
+				{1, 1, 1},
+				{1, 0, 1},
+				{1, 1, 1},
+			},
+			row:      1,
+			col:      1,
+			expected: 8,
+		},
 	}
 
 	for _, tc := range testCases {
@@ -109,21 +120,37 @@ func TestNeighbours(t *testing.T) {
 func TestIsAlive(t *testing.T) {
 	testCases := []struct {
 		name       string
+		alive      int
 		neighbours int
 		expected   int
 	}{
 		{
-			name:       "2: alive",
+			name:       "2: is alive and stays alive",
+			alive:      1,
 			neighbours: 2,
 			expected:   1,
 		},
 		{
-			name:       "3: alive",
+			name:       "2: is dead and stays dead",
+			alive:      1,
+			neighbours: 2,
+			expected:   1,
+		},
+		{
+			name:       "3: is alive and stays alive",
+			alive:      1,
 			neighbours: 3,
 			expected:   1,
 		},
 		{
-			name:       "1: dead",
+			name:       "3: is dead and is given life",
+			alive:      0,
+			neighbours: 3,
+			expected:   1,
+		},
+		{
+			name:       "1: alive and becomes dead",
+			alive:      1,
 			neighbours: 1,
 			expected:   0,
 		},
@@ -131,14 +158,14 @@ func TestIsAlive(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			assert.Equal(t, tc.expected, gol.IsAlive(tc.neighbours))
+			assert.Equal(t, tc.expected, gol.IsAlive(tc.alive, tc.neighbours))
 		})
 	}
 
-	t.Run("values above 4 is dead", func(t *testing.T) {
+	t.Run("values above 4 dies", func(t *testing.T) {
 		maxNeighbours := 9 // in a grid you can only have 8 neighbours with the center point being 0
 		for i := 4; i <= maxNeighbours; i++ {
-			assert.Equal(t, 0, gol.IsAlive(i), "expected %d to be dead", i)
+			assert.Equal(t, 0, gol.IsAlive(1, i), "expected %d to be dead", i)
 		}
 	})
 }

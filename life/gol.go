@@ -4,10 +4,12 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+
+	"not-so-random/life/internal/gol"
 )
 
 type World struct {
-	grid [][]int
+	Grid [][]int
 }
 
 func Game(input string) (World, error) {
@@ -44,18 +46,18 @@ func Game(input string) (World, error) {
 		game = append(game, cells)
 	}
 
-	return World{grid: game}, nil
+	return World{Grid: game}, nil
 }
 
 func (w World) String() string {
-	if len(w.grid) == 0 {
+	if len(w.Grid) == 0 {
 		return ""
 	}
 
 	var output string
-	output += fmt.Sprintf("%d %d\n", len(w.grid), len(w.grid[0]))
+	output += fmt.Sprintf("%d %d\n", len(w.Grid), len(w.Grid[0]))
 
-	for _, row := range w.grid {
+	for _, row := range w.Grid {
 		for _, v := range row {
 			switch v {
 			case 0:
@@ -73,5 +75,17 @@ func (w World) String() string {
 }
 
 func Evolve(w World) World {
-	return World{grid: [][]int{{0, 0}}}
+	grid := make([][]int, 0, len(w.Grid))
+
+	for row := 0; row < len(w.Grid); row++ {
+		cells := make([]int, 0, len(w.Grid[row]))
+
+		for col := 0;col < len(w.Grid[row]);col++ {
+			cells = append(cells, gol.IsAlive(w.Grid[row][col], gol.Neighbours(w.Grid, row, col)))
+		}
+
+		grid = append(grid, cells)
+	}
+
+	return World{Grid: grid}
 }
