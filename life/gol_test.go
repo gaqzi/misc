@@ -87,4 +87,11 @@ func Test_Evolve(t *testing.T) {
 
 		require.Equal(t, "2 3\n***\n***\n", life.Evolve(game).String())
 	})
+
+	t.Run("Cell with four neighbour dies", func(t *testing.T) {
+		game, err := life.Game("2 3\n***\n***\n")
+		require.NoError(t, err)
+
+		require.Equal(t, "2 3\n*.*\n*.*\n", life.Evolve(game).String())
+	})
 }
