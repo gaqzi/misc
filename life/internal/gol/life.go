@@ -27,6 +27,10 @@ func Neighbours(w life.World, row, col int) int {
 	}
 
 	if below := row + 1; below < len(w.Grid) {
+		if left := col - 1; left >= 0 {
+			total += w.Grid[below][left]
+		}
+
 		total += w.Grid[below][col]
 	}
 
