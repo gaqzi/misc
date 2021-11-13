@@ -16,7 +16,6 @@ import (
 4. Any dead cell with exactly three live neighbours becomes a live cell.
  */
 func Test_Integration(t *testing.T) {
-	t.Skip("wait until pieces built up")
 	input := `4 8
 ........
 ....*...
