@@ -116,14 +116,19 @@ func TestIsAlive(t *testing.T) {
 		expected   bool
 	}{
 		{
-			name: "2: alive",
+			name:       "2: alive",
 			neighbours: 2,
-			expected: true,
+			expected:   true,
 		},
 		{
-			name: "3: alive",
+			name:       "3: alive",
 			neighbours: 3,
-			expected: true,
+			expected:   true,
+		},
+		{
+			name:       "1: dead",
+			neighbours: 1,
+			expected:   false,
 		},
 	}
 
@@ -132,4 +137,11 @@ func TestIsAlive(t *testing.T) {
 			assert.Equal(t, tc.expected, gol.IsAlive(tc.neighbours))
 		})
 	}
+
+	t.Run("values above 4 is dead", func(t *testing.T) {
+		maxNeighbours := 9 // in a grid you can only have 8 neighbours with the center point being 0
+		for i := 4; i <= maxNeighbours; i++ {
+			assert.Equal(t, false, gol.IsAlive(i), "expected %d to be dead", i)
+		}
+	})
 }

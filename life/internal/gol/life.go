@@ -42,5 +42,10 @@ func Neighbours(w life.World, row, col int) int {
 }
 
 func IsAlive(neighbours int) bool {
-	return true
+	switch neighbours {
+	case 2, 3:
+		return true
+	default:
+		return false
+	}
 }
