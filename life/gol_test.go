@@ -60,5 +60,10 @@ func Test_Game(t *testing.T) {
 }
 
 func Test_Evolve(t *testing.T) {
+	t.Run("Cell with only one neighbour dies", func(t *testing.T) {
+		game, err := life.Game("1 2\n.*\n")
+		require.NoError(t, err)
 
+		require.Equal(t, "1 2\n..\n", life.Evolve(game).String())
+	})
 }

@@ -73,5 +73,5 @@ func (w World) String() string {
 }
 
 func Evolve(w World) World {
-	return World{}
+	return World{grid: [][]int{{0, 0}}}
 }
