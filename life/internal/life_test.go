@@ -1,11 +1,11 @@
-package gol_test
+package internal_test
 
 import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 
-	"not-so-random/life/internal/gol"
+	gol "not-so-random/life/internal"
 )
 
 func TestNeighbours(t *testing.T) {

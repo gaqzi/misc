@@ -1,4 +1,4 @@
-package gol
+package internal
 
 // Neighbours returns how many adjacent cells are alive
 func Neighbours(grid [][]int, row, col int) int {

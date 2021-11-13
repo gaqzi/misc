@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"not-so-random/life/internal/gol"
+	gol "not-so-random/life/internal"
 )
 
 type World struct {
