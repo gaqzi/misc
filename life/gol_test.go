@@ -40,15 +40,15 @@ func Test_Game(t *testing.T) {
 	// because parsing and outputting the canonical string format is important.
 
 	t.Run("empty World", func(t *testing.T) {
-		game, err := life.Game("0 0")
+		game, err := life.Game("0 0\n")
 		require.NoError(t, err)
 
 		require.Equal(t, life.World{}, game)
-		require.Equal(t, "", game.String())
+		require.Equal(t, "0 0\n", game.String())
 	})
 
 	t.Run("one grid World", func(t *testing.T) {
-		game, err := life.Game("1 1\n.")
+		game, err := life.Game("1 1\n.\n")
 		require.NoError(t, err)
 
 		require.Equal(t, life.World{{0}}, game)

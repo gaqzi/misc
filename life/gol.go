@@ -52,7 +52,7 @@ func Game(input string) (World, error) {
 // String outputs the World as a canonical string.
 func (w World) String() string {
 	if len(w) == 0 {
-		return ""
+		return "0 0\n"
 	}
 
 	var output string
