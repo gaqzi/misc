@@ -89,6 +89,16 @@ func TestNeighbours(t *testing.T) {
 			col:      1,
 			expected: 1,
 		},
+		{
+			name:     "1 neighbour below right",
+			input:    [][]int{
+				{0, 0},
+				{0, 1},
+			},
+			row:      0,
+			col:      0,
+			expected: 1,
+		},
 	}
 
 	for _, tc := range testCases {
