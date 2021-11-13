@@ -1,51 +1,49 @@
 package gol
 
-import "not-so-random/life"
-
 // Neighbours returns how many adjacent cells are alive
-func Neighbours(w life.World, row, col int) int {
+func Neighbours(grid [][]int, row, col int) int {
 	var total int
 
-	if right := col + 1; right < len(w.Grid[row]) {
-		total += w.Grid[row][right]
+	if right := col + 1; right < len(grid[row]) {
+		total += grid[row][right]
 	}
 
 	if left := col - 1; left >= 0 {
-		total += w.Grid[row][left]
+		total += grid[row][left]
 	}
 
 	if above := row - 1; above >= 0 {
 		if left := col - 1; left >= 0 {
-			total += w.Grid[above][left]
+			total += grid[above][left]
 		}
 
-		total += w.Grid[above][col]
+		total += grid[above][col]
 
-		if right := col + 1; right < len(w.Grid[above]) {
-			total += w.Grid[above][right]
+		if right := col + 1; right < len(grid[above]) {
+			total += grid[above][right]
 		}
 	}
 
-	if below := row + 1; below < len(w.Grid) {
+	if below := row + 1; below < len(grid) {
 		if left := col - 1; left >= 0 {
-			total += w.Grid[below][left]
+			total += grid[below][left]
 		}
 
-		total += w.Grid[below][col]
+		total += grid[below][col]
 
-		if right := col + 1; right < len(w.Grid[below]) {
-			total += w.Grid[below][right]
+		if right := col + 1; right < len(grid[below]) {
+			total += grid[below][right]
 		}
 	}
 
 	return total
 }
 
-func IsAlive(neighbours int) bool {
+func IsAlive(neighbours int) int {
 	switch neighbours {
 	case 2, 3:
-		return true
+		return 1
 	default:
-		return false
+		return 0
 	}
 }

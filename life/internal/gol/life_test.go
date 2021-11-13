@@ -5,7 +5,6 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"not-so-random/life"
 	"not-so-random/life/internal/gol"
 )
 
@@ -102,9 +101,7 @@ func TestNeighbours(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			game := life.World{Grid: tc.input}
-
-			assert.Equal(t, tc.expected, gol.Neighbours(game, tc.row, tc.col))
+			assert.Equal(t, tc.expected, gol.Neighbours(tc.input, tc.row, tc.col))
 		})
 	}
 }
@@ -113,22 +110,22 @@ func TestIsAlive(t *testing.T) {
 	testCases := []struct {
 		name       string
 		neighbours int
-		expected   bool
+		expected   int
 	}{
 		{
 			name:       "2: alive",
 			neighbours: 2,
-			expected:   true,
+			expected:   1,
 		},
 		{
 			name:       "3: alive",
 			neighbours: 3,
-			expected:   true,
+			expected:   1,
 		},
 		{
 			name:       "1: dead",
 			neighbours: 1,
-			expected:   false,
+			expected:   0,
 		},
 	}
 
@@ -141,7 +138,7 @@ func TestIsAlive(t *testing.T) {
 	t.Run("values above 4 is dead", func(t *testing.T) {
 		maxNeighbours := 9 // in a grid you can only have 8 neighbours with the center point being 0
 		for i := 4; i <= maxNeighbours; i++ {
-			assert.Equal(t, false, gol.IsAlive(i), "expected %d to be dead", i)
+			assert.Equal(t, 0, gol.IsAlive(i), "expected %d to be dead", i)
 		}
 	})
 }
