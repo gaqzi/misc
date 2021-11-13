@@ -39,6 +39,8 @@ func Neighbours(grid [][]int, row, col int) int {
 	return total
 }
 
+// IsAlive returns whether this value should be alive or dead based on the number of neighbours it has.
+// Following the Game of Life rules.
 func IsAlive(alive, neighbours int) int {
 	switch {
 	case neighbours == 2 && alive == 1:
