@@ -8,9 +8,7 @@ import (
 	gol "not-so-random/life/internal"
 )
 
-type World struct {
-	Grid [][]int
-}
+type World [][]int
 
 func Game(input string) (World, error) {
 	lines := strings.Split(input, "\n")
@@ -26,7 +24,7 @@ func Game(input string) (World, error) {
 	}
 
 	rows, cols := size[0], size[1]
-	game := make([][]int, 0, rows)
+	game := make(World, 0, rows)
 
 	for i := 0; i < rows; i++ {
 		row := strings.Split(lines[i+1], "")
@@ -46,18 +44,18 @@ func Game(input string) (World, error) {
 		game = append(game, cells)
 	}
 
-	return World{Grid: game}, nil
+	return game, nil
 }
 
 func (w World) String() string {
-	if len(w.Grid) == 0 {
+	if len(w) == 0 {
 		return ""
 	}
 
 	var output string
-	output += fmt.Sprintf("%d %d\n", len(w.Grid), len(w.Grid[0]))
+	output += fmt.Sprintf("%d %d\n", len(w), len(w[0]))
 
-	for _, row := range w.Grid {
+	for _, row := range w {
 		for _, v := range row {
 			switch v {
 			case 0:
@@ -75,17 +73,17 @@ func (w World) String() string {
 }
 
 func Evolve(w World) World {
-	grid := make([][]int, 0, len(w.Grid))
+	grid := make(World, 0, len(w))
 
-	for row := 0; row < len(w.Grid); row++ {
-		cells := make([]int, 0, len(w.Grid[row]))
+	for row := 0; row < len(w); row++ {
+		cells := make([]int, 0, len(w[row]))
 
-		for col := 0;col < len(w.Grid[row]);col++ {
-			cells = append(cells, gol.IsAlive(w.Grid[row][col], gol.Neighbours(w.Grid, row, col)))
+		for col := 0;col < len(w[row]);col++ {
+			cells = append(cells, gol.IsAlive(w[row][col], gol.Neighbours(w, row, col)))
 		}
 
 		grid = append(grid, cells)
 	}
 
-	return World{Grid: grid}
+	return grid
 }
