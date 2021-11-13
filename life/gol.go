@@ -8,8 +8,10 @@ import (
 	gol "not-so-random/life/internal"
 )
 
+// World represents a Game of Life world and can output itself in the canonical string format.
 type World [][]int
 
+// Game parses a canonical string into a World.
 func Game(input string) (World, error) {
 	lines := strings.Split(input, "\n")
 
@@ -47,6 +49,7 @@ func Game(input string) (World, error) {
 	return game, nil
 }
 
+// String outputs the World as a canonical string.
 func (w World) String() string {
 	if len(w) == 0 {
 		return ""
@@ -72,6 +75,7 @@ func (w World) String() string {
 	return output
 }
 
+// Evolve runs the Game of Life on each cell of the world creating the next generation.
 func Evolve(w World) World {
 	grid := make(World, 0, len(w))
 
