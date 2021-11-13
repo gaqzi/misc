@@ -10,7 +10,6 @@ import (
 )
 
 func TestNeighbours(t *testing.T) {
-
 	testCases := []struct {
 		name     string
 		input    [][]int
