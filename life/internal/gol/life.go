@@ -40,3 +40,7 @@ func Neighbours(w life.World, row, col int) int {
 
 	return total
 }
+
+func IsAlive(neighbours int) bool {
+	return true
+}
