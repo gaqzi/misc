@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	gol "not-so-random/life/internal"
+	gol "misc/life/internal"
 )
 
 // World represents a Game of Life world and can output itself in the canonical string format.

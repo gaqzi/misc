@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	gol "not-so-random/life/internal"
+	gol "misc/life/internal"
 )
 
 func TestNeighbours(t *testing.T) {

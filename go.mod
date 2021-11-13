@@ -1,4 +1,4 @@
-module not-so-random
+module misc
 
 go 1.16
 

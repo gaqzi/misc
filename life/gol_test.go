@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"not-so-random/life"
+	"misc/life"
 )
 
 /*
