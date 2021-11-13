@@ -50,6 +50,16 @@ func TestNeighbours(t *testing.T) {
 			expected: 1,
 		},
 		{
+			name:     "1 neighbour above: right",
+			input:    [][]int{
+				{0, 1},
+				{0, 0},
+			},
+			row:      1,
+			col:      0,
+			expected: 1,
+		},
+		{
 			name:     "1 neighbour below",
 			input:    [][]int{
 				{0},
